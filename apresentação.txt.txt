@@ -1,0 +1,6 @@
+nome: Silvio José da silva pinto
+idade:17 anos
+conhecimento técnico: nada
+mora com: minha mãe
+gosta de: jogar e ler quadrinhos
+trabalho: não trabalho mas gostaria de trabalhar em backenge
