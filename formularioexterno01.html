@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Externo 01</title>
+    <link rel="stylesheet" href="../normalize.css"></link>
+    <style rel="stylesheet">
+        *,*:before,*:after{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .menu-select{
+            float:right;
+            margin-top:-60px;
+        }
+        .clear{
+            clear:both;
+        }
+        body{
+            font:18px/1.4 arial,sans-serif;
+            color:#333;
+            background: #ccc;
+
+        }
+        #tudo{
+            width: 100%;
+            max-width: 1200px;
+            min-width: 860px;
+            margin:0 auto;
+            background: #fff;
+
+        }
+        h1,h2,h3,h4,h5,h6{
+            color:#036;
+        }
+        main h1{
+            margin-top: -25px;
+
+        }
+        .topo_header{
+            background: #036;
+            padding: 5px 20px;
+
+        }
+        .topo_header h1{
+            font-size:36px;
+            margin: 4px 0 2px 0;
+
+        }
+        .topo_header a{
+            color:#fff;
+            text-decoration: none;
+
+        }
+        .topo_header h2{
+            font-size:20px;
+            margin: 2px 0 4px 0;
+            color:#fff;
+
+        }
+        .principal{
+            width: 100%;
+            padding: 20px 15px;
+        }
+        .rodape{
+            background: #036;
+            color:#fff;
+            text-align: center;
+        }
+        pre{font-size: 14px;}
+        @media(max-width:1040px){
+            pre{font-size: 12px;}
+        }
+        /*formulario*/
+        input[autofocus]{
+            width: 450px;
+        }
+        input[type="submit"]{
+            border: none;
+            border-radius: 6px;
+            padding: 4px 10px;
+            color:rgb(255,255,255);
+            background:rgb(0,102,153);
+        }
+        input[type="submit"]:hover{
+            background: rgba(0,102,153,0.7);
+        }
+    </style>
+</head>
+<body class="home">
+    <div id="tudo">
+        <div class="topo">
+        <header class="topo_header">
+            <hgroup>
+                <h1><a href="/">Formulario</a></h1>
+                <h2>Atributos</h2>
+            </hgroup>
+        </header>
+        </div><!--fim da div topo-->
+        <div class="principal">
+            <main>
+                <section>
+                    <h1>Atributos para campos de formulario</h1>
+
+                    <form>
+                        <p><label>maxlength="6":<input type="text" maxlength="6" required></label><input type="submit" value="ok"></p>
+                    </form>
+                </section>
+            </main>
+        </div><!--fim da div principal-->
+        <div class="rodape">
+            <footer>
+                <small>Exemplo desenvolvido pelo aluno silvio josé da silva pinto</small>
+            </footer>
+        </div><!--fim da div rodape-->
+
+    </div>
+    
+</body>
+</html>
