@@ -1,0 +1,47 @@
+body{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: aqua;
+
+}
+h1{
+    text-align: center;
+    color: red;
+    font-weight: bolder;
+    font-size: 50px;
+}
+h2{
+    text-align: center;
+    color: black;
+    font-size: 35px;
+}
+
+fieldset{
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    background-color:rgb(130, 196, 235);
+    border-radius: 25px;
+    border: 2px solid rgb(15, 12, 207);
+}
+table{
+    border-color:rgb(236, 24, 141); 
+    border-radius: 25px;
+    color: rgb(109, 85, 18);
+}
+input{
+    color: rgb(97, 5, 5);
+}
+
+input[type="date"]{
+    width: 97%;
+}
+
+.btn{
+    background-color: rgb(8, 247, 167);
+    border-radius: 25px;
+    text-align: center;
+    height: 50px;
+    margin-left: 470px;
+    border-color: rgb(40, 3, 247);
+    color: rgb(236, 1, 91);
+}
