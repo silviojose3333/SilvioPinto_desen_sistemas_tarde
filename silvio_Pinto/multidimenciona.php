@@ -28,9 +28,9 @@
             array("Codigo"=>"CDs","Descrisão"=> "Musicas","preço"=>20)
         );
         for($linha=0;$linha<3;$linha++){?>
-           <p> <?=$amazonasproducts[$linha]["Codigo"]?>
-           <?=$amazonasproducts[$linha]["Descrisão"]?>
-           <?=$amazonasproducts[$linha]["preço"]?>
+           <p>  <?=$amazonasproducts[$linha]["Codigo"]?>
+                <?=$amazonasproducts[$linha]["Descrisão"]?>
+                <?=$amazonasproducts[$linha]["preço"]?>
 
         
         </p>

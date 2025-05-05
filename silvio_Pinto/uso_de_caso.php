@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php
-        $a="";
+        $a="lampada";
         switch($a){
             case "casa":
                 print "A casa é amarela";
