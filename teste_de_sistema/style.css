@@ -1,0 +1,47 @@
+body{
+    font-family: Arial,  sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container{
+    background-color: #fff;
+    padding: 20PX;
+    border-radius: 5PX;
+    box-shadow: 0 0 10PX rgba(0,0,0,0.1);
+}
+
+h2{
+    margin-bottom: 20px;
+    color: #333;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+label{
+    margin-bottom: 5px;
+    color: #666;
+}
+input[type="text"],
+input[type="tel"]{
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+button{
+    padding: 10px;
+    background-color: #5cb35c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #4cae4c;
+}
