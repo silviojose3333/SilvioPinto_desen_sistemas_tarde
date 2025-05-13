@@ -14,7 +14,7 @@ nome_input.send_keys("Joâo da Silva")
 
 #preenche o campo CPF
 cpf_input = driver.find_element(By.ID, "cpf")
-cpf_input.send_keys("1234567890")
+cpf_input.send_keys("12345678901")
 
 #preenche o campio endereço
 endereco_input = driver.find_element(By.ID, "address")

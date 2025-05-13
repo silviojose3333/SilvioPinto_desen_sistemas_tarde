@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de cliente</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Cadastro de cliente</h2>
+        <form action="/submit" method="post">
+
+            <label for="cod">Cod. Peça:</label>
+            <input type="text" id="cod" name="cod" required pattern="[1-9][0-9]*" title="insira um numero inteiro">
+            
+            <label for="descricao">Descrição:</label>
+            <textarea type="text" id="descricao" name="descricao" required ></textarea>
+
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" name="marca" required >
+
+            <label for="preco">Preço:</label>
+            <input type="text" id="preco" name="preco" required pattern="([0-9]+(\.[0-9]+)?)" title="insira um numero">
+
+            <label for="qnt">Quantidade:</label>
+            <input type="text" id="qnt" name="qnt" required pattern="[1-9][0-9]*" title="insira um numero inteiro">
+
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+</body>
+</html>
