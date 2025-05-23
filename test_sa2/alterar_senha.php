@@ -39,7 +39,8 @@ if($_SERVER ["REQUEST_METHOD"]=="POST"){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alterar a senha</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style_sa.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <h2>Alterar a senha</h2>

@@ -41,7 +41,8 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de cliente</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_sa.css">
+    <script src="script.js"></script>
     <!--Arquivo opcional para estilizar -->
 </head>
 <body>
@@ -52,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
 
 
         <label for="email">Email:</label>
-        <input type="text" id="email" name="email" required>
+        <input type="email" id="email" name="email" required>
 
         <label for="nova_senha">senha</label>
         <input type="password" id="senha" name="senha" required>

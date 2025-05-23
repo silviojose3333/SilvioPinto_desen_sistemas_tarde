@@ -14,7 +14,7 @@ if($_SERVER ["REQUEST_METHOD"]=="POST"){
     if($usuario && $senha ==$usuario['senha']){
         //LOGIN BEM SUCEDIDO DEFINE ATRAVEIS DE SESSAO
         $_SESSION['usuario']=$usuario['nome'];
-        $_SESSION['perfil']=$usuario['id_perfil'];
+        $_SESSION['perfil']=$usuario['idperfil'];
         $_SESSION['id_usuario']=$usuario['id_usuario'];
         
             //redireciona para a pagina principal
@@ -33,7 +33,8 @@ if($_SERVER ["REQUEST_METHOD"]=="POST"){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style_sa.css">
+    <script src="script.js"></script>
 
 </head>
 <body>
@@ -50,5 +51,6 @@ if($_SERVER ["REQUEST_METHOD"]=="POST"){
     </form>
     <p class="linkEsqueciSenha"><a href="enviar_email.php">Esqueci minha senha</a></p>
     <p class="linkCadastro"><a href="cadastrar.php">cadstrar</a></p>
+    <p class="linkAnonimo"><a href="principal.php">Entrar em modo Anonimo</a></p>
 </body>
 </html>
