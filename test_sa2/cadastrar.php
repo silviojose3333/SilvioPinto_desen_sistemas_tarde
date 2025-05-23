@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     $stmt->bindParam(":idperfil",$_POST["idperfil"]);
     try{
         $stmt->execute();
-        header("Location:principal.php");
+        header("Location:login.php");
 
     }catch(PDOException $e){
         error_log("Erro ao inserir cliente:".$e->getMessage());

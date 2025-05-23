@@ -35,6 +35,14 @@ if(isset($_SESSION['id_usuario'])){
     ];
     //OBTEMDO AS OPÇÕES DISPONIVEIS PARA O PERFIL LOGADO
     $opcoes_menu=$permissoes[$id_perfil];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id=$_POST['serie'];
+    $serie=selecionarObra($id);
+    $temporadas=selecionarTemporada($id);
+    $temporada_f=selecionarTemporada1($id);
+    $episodio_f1=selecionarEpisodio1($temporada_f['id_temporada']);
+    avaliar($_SESSION['id_usuario'],$episodio_f1['id_episodio'],$_POST['nota']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -69,9 +77,11 @@ if(isset($_SESSION['id_usuario'])){
                 <li class="dropdown">
                     <a href="#"><?php echo $nome_perfil;?></a>
                     <ul class="dropdown-menu2">
+                    <?php if($id_perfil!=3):?>
                         <li>
                             <a href="alterar_cliente.php">atualizar dados</a>
                         </li>
+                      <?php endif;?>
                         <li>
                             <a href="login.php">Trocar de conta</a>
                         </li>

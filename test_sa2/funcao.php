@@ -81,6 +81,22 @@ function selecionarEpisodio1($id){
             echo"Erro ao cadastrar cliente3.";
         }
 }
+function avaliar($usuario,$id_episodio,$nota){
+    global $pdo;
+    $dataAtual = date('Y-m-d H:i:s');
+    $episodio=selecionarEpisodio1($id_episodio);
+    $sql_a="INSERT INTO avaliacao (data_nota,  nota , idusuario, idepisodio ) VALUES (:data_nota,  :nota , :idusuario, :idepisodio)";
+    $stmt=$pdo->prepare($sql_a);
+    $stmt->bindParam(":data_nota",$dataAtual);
+    $stmt->bindParam(":nota",$nota);
+    $stmt->bindParam(":idusuario",$usuario);
+    $stmt->bindParam(":idepisodio",$episodio['id_episodio']);
+    try{$stmt->execute();
+    }catch(PDOException $e){
+        error_log("Erro ao inserir cliente3:".$e->getMessage());
+        echo"Erro ao cadastrar cliente3.";
+    }
+}
 
 
 
