@@ -1,15 +1,13 @@
-function toggleSubmenu() {
-    const submenu = document.getElementById('submenuForm');
-    submenu.classList.toggle('show');
+
+function toggleSubmenu(index) {
+    const submenu = document.getElementById('submenu-' + index);
+    if (submenu) {
+        submenu.classList.toggle('show');
+    }
 }
 
-window.addEventListener('click', function (e) {
-    const submenu = document.getElementById('submenuForm');
-    const button = document.querySelector('.submenu-wrapper button');
-    if (!submenu.contains(e.target) && !button.contains(e.target)) {
-        submenu.classList.remove('show');
-    }
-});
+  // Fecha submenus ao clicar fora
+
 function abrirModal(nome,serie,form) {
     document.getElementById(form).style.display = "flex";
     document.getElementById("nomeEscolhido").textContent = nome;

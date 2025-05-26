@@ -20,19 +20,20 @@
         $nome_perfil=$perfil['nome_perfil'];
     }
     $pesquisa=isset($_POST['pesquisa'])?
-    $_POST['pesquisa']:'';
+    $_POST['pesquisa']:' ';
     $opc=isset($_POST['a'])?
-    $_POST['a']:'';
+    $_POST['a']:' ';
     $interesses=isset($_POST['generos'])?
     $_POST['generos']:[];
     $opcoes = ['Anime', 'Serie', 'Filme', 'Livro','Jogo'];
-    $selecionada = $_POST['tipo'] ?? '';
+    $selecionada = $_POST['tipo'] ?? ' ';
     
     
     $genero=["ação","animação","aventura","biografia ou autobiografia","comedia","corrida","documentário","drama","esporte",
             "estratégia","fantasia","ficcao cientifica","fps","historico","isekai","josei","literatura clássica","mecha","mmorpg","uusical","nao ficcao",
             "plataforma","policial ou crime","puzzle","rpg","romance","seinen","shōjo","shōnen","simulação","slice of life","suspense ou thriller",
             "terror ou horror","terro psicológico","terror de sobrevivencia"];
+    $series=pesquisar(isset($_POST['pesquisa'])?$_POST['pesquisa']:'', $_POST['tipo'] ?? '',isset($_POST['generos'])?$_POST['generos']:[],isset($_POST['a'])?$_POST['a']:'Z');
     $permissoes=[
         1=>["funcao"=>["adicionar_obra.php","relatorio.php","adicionar_adm.php"]],
                 
@@ -122,12 +123,58 @@
         ?>
         </div>
     </div>
-        <select name="tipo" id="tipo">
-        <?php foreach ($opcoes as $opcao): ?>
-            <option  value="<?php echo $opcao; ?>" <?= $opcao == $selecionada ? 'selected' : '' ?>><?php echo $opcao; ?></option>
-        <?php endforeach; ?>
+    <select name="tipo" id="tipo"> 
+    <!-- Opção para não selecionar nenhum tipo -->
+    <option value="" <?= empty($selecionada) ? 'selected' : '' ?>>-- Todos os tipos --</option>
+
+    <?php foreach ($opcoes as $opcao): ?>
+        <option value="<?php echo $opcao; ?>" <?= $opcao == $selecionada ? 'selected' : '' ?>>
+            <?php echo $opcao; ?>
+        </option>
+    <?php endforeach; ?>
+</select>
 
         <input type="submit" value="Executar">
     </form>
+
+    <?php foreach($series as $serie): ?>
+<form action="detales_obra.php" method="POST">
+    <button type="submit" name="nome" value="<?=htmlspecialchars($serie["id_serie"])?>" style="all: unset; cursor: pointer;">
+    <div style="border: 1px solid #ccc; padding: 20px; margin: 10px; display: flex; gap: 20px; align-items: center; background-color: #f9f9f9;">
+    <div>
+
+    <img src= "<?=htmlspecialchars($serie['imagem'])?>" width='200'><br><br>
+    <h1><?=htmlspecialchars($serie["nome_serie"])?></h1>
+    <h2><?=htmlspecialchars($serie["tipo"])?></h2>
+    <h3><?=htmlspecialchars($serie["genero"])?></h3>
+    <p><?=htmlspecialchars($serie["sinopse"])?></p>
+    <?php $nota = $serie['media_nota'] !== null ? number_format($serie['media_nota'], 1) : '0.0';?>
+    <p><?=htmlspecialchars($nota)?>/10</p>
+    <input type="hidden" name="tipo_form" value="obra">
+</div>
+</div>
+</button>
+</form>
+<?php if($id_perfil==2):?>
+<button onclick="abrirModal('<?= htmlspecialchars($serie['nome_serie']);?>','<?= htmlspecialchars($serie['id_serie']);?>','meuModal')">Selecionar <?= htmlspecialchars($serie['nome_serie']) ?></button><br><br>
+
+
+<?php else:?>
+    <button onclick="pedidoLogar()">Selecionar <?= htmlspecialchars($serie['nome_serie']) ?></button><br><br>
+<?php endif;?>
+<?php endforeach;?>
+
+<div class="overlay" id="meuModal">
+  <form class="modal" method="POST" action="principal.php">
+    <h3>Confirmar seleção</h3>
+    <p>Você selecionou: <span id="nomeEscolhido"></span></p>
+
+
+    <input type="hidden" name="serie" id="inputNome">
+    <input type="range" id="nota" name="nota" min="1" max="10" value="5" oninput="outputNota.value = nota.value">
+    <output name="outputNota">5</output><br><br>
+    <button type="submit">Enviar</button>
+  </form>
+
     </body>
     </html>

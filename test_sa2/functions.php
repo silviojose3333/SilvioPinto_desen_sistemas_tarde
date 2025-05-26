@@ -1,6 +1,5 @@
 <?php
 require_once "conexao.php";
-require_once "funcao.php";
 
 if ($_SERVER["REQUEST_METHOD"]=="POST"){
     if(isset($_FILES['imagem_obra'])){
@@ -84,16 +83,13 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
                         $stmt->execute();
                         $tep=$stmt->fetchAll();
                         foreach($tep as $tem){
-                            
-                            /*$sql_add_e_f="INSERT INTO episodio(descrisao_ep, titulo,idtemporada) VALUES (:descrisao_ep,:titulo,:idtemporada)";
+                            $sql_add_e_f="INSERT INTO episodio(descrisao_ep, titulo,idtemporada) VALUES (:descrisao_ep,:titulo,:idtemporada)";
                             $stmt=$pdo->prepare($sql_add_e_f);
                             $stmt->bindParam(":descrisao_ep",$n_e);
                             $stmt->bindParam(":titulo",$n_ef);
                             $stmt->bindParam(":idtemporada",$tem['id_temporada']);
-                            $stmt->execute();*/
                             try{
-                                inserirEpisodio($tem['id_temporada'],$n_e,$n_ef);
-                                header('Location:principal.php');
+                                $stmt->execute();
                             }catch(PDOException $e){
                                 error_log("Erro ao inserir cliente3:".$e->getMessage());
                                 echo"Erro ao cadastrar cliente3.";

@@ -9,7 +9,7 @@ $genero=["ação","animação","aventura","biografia ou autobiografia","comedia"
 
 session_start();
 require_once 'conexao.php';
-if(isset($_SESSION['id_usuario'])===1){
+if(isset($_SESSION['id_usuario'])==1){
     $id_perfil=$_SESSION['perfil'];
     $sqlperfil="SELECT nome_perfil FROM perfil WHERE id_perfil=:id_perfil";
     $stmtperfil=$pdo->prepare($sqlperfil);
