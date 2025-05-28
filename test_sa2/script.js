@@ -4,6 +4,7 @@ function toggleSubmenu(index) {
     if (submenu) {
         submenu.classList.toggle('show');
     }
+
 }
 
   // Fecha submenus ao clicar fora

@@ -104,8 +104,11 @@ if(isset($_SESSION['id_usuario'])==1){
         <!--UM CAMPO PARA COLOCAR O GENERO DA OBRA-->
         <div class="submenu-wrapper">
             <!--TRAVES DA FUNCAO TOGGLESUBMENU VAZ UM SUB-MENU AO CLICAR NO BOTAO-->
-            <button type="button" onclick="toggleSubmenu()">Generos</button>
-            <div class="submenu" id="submenuForm">
+            <button type="button"  onclick="toggleSubmenu(1)">Mais opçoes</button>
+
+
+            <!-- Submenu com checkboxes (criado com foreach) -->
+            <div class="submenu" id="submenu-1">
                 <!--USA UM FOREACH PARA ZAVER OS CAMPOS DE CHECKBOX-->
                 <?php foreach ($genero as $valor): ?>
                     <label>

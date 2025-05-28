@@ -61,6 +61,19 @@ function selecionarEpisodio($id){
             echo"Erro ao cadastrar cliente3.";
         }
 }
+/*function selecionarTotalAvaliacoes($id){
+    global $pdo;
+    $sqlS_e="SELECT COUNT(a.idepisodio) AS quantidade, 1) AS media_nota,e.* FROM episodio e JOIN avaliacao a ON a.idepisodio = e.id_episodio WHERE a.idepisodio=:idepisodio GROUP BY e.id_episodio";
+    $stmt=$pdo->prepare($sqlS_e);
+    $stmt->bindParam(":idepisodio",$id);
+    try{$stmt->execute();
+        $serie=$stmt->fetch(PDO::FETCH_ASSOC);
+        return $serie;
+        }catch(PDOException $e){
+            error_log("Erro ao inserir cliente3:".$e->getMessage());
+            echo"Erro ao cadastrar cliente3.";
+        }
+}*/
 function selecionarTemporada1($id){
     global $pdo;
     $sqlS_t="SELECT id_temporada,descrisao_tem,idserie FROM temporada WHERE idserie=:idserie ORDER BY id_temporada ASC LIMIT 1";
@@ -88,11 +101,12 @@ function selecionarEpisodio1($id){
             echo"Erro ao cadastrar cliente3.";
         }
 }
+
 function avaliar($usuario,$id_episodio,$nota){
     global $pdo;
     
     
-    print_r($id_episodio);
+    
     $sql_va="SELECT idusuario,idepisodio FROM avaliacao WHERE idusuario=:idusuario AND idepisodio=:idepisodio";
     $stmt=$pdo->prepare($sql_va);
     $stmt->bindParam(":idusuario",$usuario);
@@ -103,6 +117,7 @@ function avaliar($usuario,$id_episodio,$nota){
         $dados=$stmt->fetchAll();
         if (count($dados) > 0) {
             echo "<script>return confirm('voce ja avaliou essa obra,você deseja alterar a nota ');</script>";
+            echo"fogo no cu";
         } else {
             
 

@@ -135,7 +135,7 @@ $opcoes_menu=$permissoes[$id_perfil];
       <h1><?=htmlspecialchars($serie["nome_serie"])?></h1>
       <h2><?=htmlspecialchars($serie["tipo"])?></h2>
       <h3><?=htmlspecialchars($serie["genero"])?></h3>
-
+      
       <p><?=htmlspecialchars($serie["sinopse"])?></p>
       <?php $nota = $episodio_f1['media_nota'] !== null ? number_format($episodio_f1['media_nota'], 1) : '0.0';?>
     <p><?=htmlspecialchars($nota)?>/10</p>
@@ -165,8 +165,9 @@ $opcoes_menu=$permissoes[$id_perfil];
     
       foreach($temporadas as $index => $temporada):
         $episodio_f=selecionarEpisodio1($temporada['id_temporada']);
+        
         echo"<div class=\"submenu-wrapper\">";
-        ?><button type="button" onclick="toggleSubmenu(<?= $index ?>)"><?=htmlspecialchars($temporada['descrisao_tem'])?></button>
+        ?><button type="button" class="botao-principal" data-target="submenu-<?= $index ?>"  onclick="toggleSubmenu(<?= $index ?>)"><?=htmlspecialchars($temporada['descrisao_tem'])?></button>
         <?php $nota = $episodio_f['media_nota'] !== null ? number_format($episodio_f['media_nota'], 1) : '0.0';?>
         <p><?=htmlspecialchars($nota)?>/10</p>
         <?php if($id_perfil==2):?>
@@ -220,7 +221,10 @@ $opcoes_menu=$permissoes[$id_perfil];
               <?php endif;?>
                 <?=htmlspecialchars($episodio['titulo']); ?>
                 <?php $nota = $episodio['media_nota'] !== null ? number_format($episodio['media_nota'], 1) : '0.0';?>
+                
                 <p><?=htmlspecialchars($nota)?>/10</p>
+                <!--<?php// $avaliacoes=selecionarTotalAvaliacoes($episodio['id_episodio'])?>
+                <p>N.A:<?php//htmlspecialchars($avaliacoes['quantidade'])?></p>-->
               </label>
               
                     
