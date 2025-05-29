@@ -106,8 +106,12 @@
     <br>
     
     <div class="submenu-wrapper">
-        <button type="button" onclick="toggleSubmenu()">Generos</button>
-        <div class="submenu" id="submenuForm">
+            <!--TRAVES DA FUNCAO TOGGLESUBMENU VAZ UM SUB-MENU AO CLICAR NO BOTAO-->
+            <button type="button"  onclick="toggleSubmenu(1)">Mais opçoes</button>
+
+
+            <!-- Submenu com checkboxes (criado com foreach) -->
+            <div class="submenu" id="submenu-1">
         <?php
         
         for($i=0;$i<count($genero);$i++){

@@ -7,6 +7,38 @@ function toggleSubmenu(index) {
 
 }
 
+function inicializarEstrelas(containerId, inputId) {
+    const container = document.getElementById(containerId);
+    const input = document.getElementById(inputId);
+    const estrelas = container.querySelectorAll('.estrela');
+    let notaSelecionada = 0;
+
+    estrelas.forEach((estrela) => {
+      const valor = parseInt(estrela.dataset.value);
+
+      // Hover
+      estrela.addEventListener('mouseenter', () => {
+        estrelas.forEach(e => {
+          e.classList.toggle('hover', parseInt(e.dataset.value) <= valor);
+        });
+      });
+
+      estrela.addEventListener('mouseleave', () => {
+        estrelas.forEach(e => e.classList.remove('hover'));
+      });
+
+      // Clique
+      estrela.addEventListener('click', () => {
+        notaSelecionada = valor;
+        input.value = valor;
+
+        estrelas.forEach(e => {
+          e.classList.toggle('selecionada', parseInt(e.dataset.value) <= valor);
+        });
+      });
+    });
+  }
+
   // Fecha submenus ao clicar fora
 
 function abrirModal(nome,serie,form) {

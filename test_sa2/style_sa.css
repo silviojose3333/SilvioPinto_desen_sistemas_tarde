@@ -92,3 +92,28 @@ button[type="submit"] {
 .dropdown:hover .dropdown-menu {
     display: block;
 }
+.avaliacao {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    font-size: 2rem;
+    width: max-content;
+  }
+
+  .estrela {
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .estrela.hover,
+  .estrela.selecionada {
+    color: gold;
+  }
+
+  .mensagem {
+    margin-top: 1rem;
+    font-family: sans-serif;
+    font-size: 1.2rem;
+    color: green;
+  }

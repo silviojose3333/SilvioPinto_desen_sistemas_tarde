@@ -22,7 +22,7 @@ ORDER BY  s.id_serie  DESC LIMIT 10";
 
 function selecionarObra($id){
     global $pdo;
-    $sqlS_o="SELECT id_serie,imagem ,genero,tipo,sinopse,nome_serie FROM serie WHERE id_serie=:id_serie";
+    $sqlS_o="SELECT id_serie,imagem ,genero,tipo,sinopse,nome_serie,ativo FROM serie WHERE id_serie=:id_serie";
     $stmt=$pdo->prepare($sqlS_o);
     $stmt->bindParam(":id_serie",$id);
     try{$stmt->execute();
@@ -37,7 +37,7 @@ function selecionarObra($id){
 
 function selecionarTemporada($id){
     global $pdo;
-    $sqlS_t="SELECT id_temporada,descrisao_tem,idserie FROM temporada WHERE idserie=:idserie";
+    $sqlS_t="SELECT id_temporada,descrisao_tem,idserie,ativo FROM temporada WHERE idserie=:idserie";
     $stmt=$pdo->prepare($sqlS_t);
     $stmt->bindParam(":idserie",$id);
     try{$stmt->execute();
@@ -76,7 +76,7 @@ function selecionarEpisodio($id){
 }*/
 function selecionarTemporada1($id){
     global $pdo;
-    $sqlS_t="SELECT id_temporada,descrisao_tem,idserie FROM temporada WHERE idserie=:idserie ORDER BY id_temporada ASC LIMIT 1";
+    $sqlS_t="SELECT id_temporada,descrisao_tem,idserie,ativo FROM temporada WHERE idserie=:idserie ORDER BY id_temporada ASC LIMIT 1";
     $stmt=$pdo->prepare($sqlS_t);
     $stmt->bindParam(":idserie",$id);
     try{$stmt->execute();
@@ -238,6 +238,33 @@ function inserirTemporada($id,$des){
             error_log("Erro ao inserir cliente3:".$e->getMessage());
             echo"Erro ao cadastrar cliente3.";
         }
+    }catch(PDOException $e){
+        error_log("Erro ao inserir cliente3:".$e->getMessage());
+        echo"Erro ao cadastrar cliente3.";
+    }
+}
+
+function alterarTemporada($id,$des){
+    global $pdo;
+    $sql_a_t="UPDATE temporada SET descrisao_tem = :descrisao_tem  WHERE id_temporada = :id_temporada ";
+    $stmt=$pdo->prepare($sql_a_t);
+    $stmt->bindParam(":descrisao_tem", $des);
+    $stmt->bindParam(":id_temporada", $id);
+    try{$stmt->execute();
+    }catch(PDOException $e){
+        error_log("Erro ao inserir cliente3:".$e->getMessage());
+        echo"Erro ao cadastrar cliente3.";
+    }
+}
+
+function alterarEpisodio($id,$des,$titulo){
+    global $pdo;
+    $sql_a_e="UPDATE episodio SET descrisao_ep = :descrisao_ep,titulo = :titulo  WHERE id_episodio = :id_episodio ";
+    $stmt=$pdo->prepare($sql_a_e);
+    $stmt->bindParam(":descrisao_ep", $des);
+    $stmt->bindParam(":titulo", $titulo);
+    $stmt->bindParam(":id_episodio", $id);
+    try{$stmt->execute();
     }catch(PDOException $e){
         error_log("Erro ao inserir cliente3:".$e->getMessage());
         echo"Erro ao cadastrar cliente3.";
