@@ -1,7 +1,30 @@
 <?php
 require_once "conexao.php";
 
-
+function confirmarAcao() {
+    // Verifica se o formulário foi enviado
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmacao'])) {
+        if ($_POST['confirmacao'] === 'sim') {
+            echo "Usuário confirmou (SIM).";
+            // Aqui vai sua lógica de confirmação
+        } else {
+            echo "Usuário cancelou (NÃO).";
+            // Aqui vai a lógica de negação
+        }
+        return;
+    }
+    echo'<script>abrir("modalAvaliação")</script>';
+    // Se ainda não confirmou, mostra o "alert"
+    echo '<div id="modalAvaliação" class="overlay">';
+    echo '<div class="modal">';
+    echo '<form method="post">';
+    echo '<p>Você deseja realmente executar esta ação?</p>';
+    echo '<button type="submit" name="confirmacao" value="sim">Sim</button>';
+    echo '<button type="submit" onclick="fechar("modalAvaliação" name="confirmacao" value="nao">Não</button>';
+    echo '</form>';
+    echo '</div>';
+    echo '</div>';
+}
 
 function mostrarNovidades(){
     global $pdo;
@@ -61,9 +84,9 @@ function selecionarEpisodio($id){
             echo"Erro ao cadastrar cliente3.";
         }
 }
-/*function selecionarTotalAvaliacoes($id){
+function selecionarTotalAvaliacoes($id){
     global $pdo;
-    $sqlS_e="SELECT COUNT(a.idepisodio) AS quantidade, 1) AS media_nota,e.* FROM episodio e JOIN avaliacao a ON a.idepisodio = e.id_episodio WHERE a.idepisodio=:idepisodio GROUP BY e.id_episodio";
+    $sqlS_e="SELECT COUNT(a.idepisodio) AS quantidade,e.* FROM episodio e JOIN avaliacao a ON a.idepisodio = e.id_episodio WHERE a.idepisodio=:idepisodio GROUP BY e.id_episodio";
     $stmt=$pdo->prepare($sqlS_e);
     $stmt->bindParam(":idepisodio",$id);
     try{$stmt->execute();
@@ -73,7 +96,7 @@ function selecionarEpisodio($id){
             error_log("Erro ao inserir cliente3:".$e->getMessage());
             echo"Erro ao cadastrar cliente3.";
         }
-}*/
+}
 function selecionarTemporada1($id){
     global $pdo;
     $sqlS_t="SELECT id_temporada,descrisao_tem,idserie,ativo FROM temporada WHERE idserie=:idserie ORDER BY id_temporada ASC LIMIT 1";
@@ -106,19 +129,23 @@ function avaliar($usuario,$id_episodio,$nota){
     global $pdo;
     
     
-    
-    $sql_va="SELECT idusuario,idepisodio FROM avaliacao WHERE idusuario=:idusuario AND idepisodio=:idepisodio";
+    $sql_va="SELECT * FROM avaliacao WHERE idusuario=:idusuario AND idepisodio=:idepisodio";
     $stmt=$pdo->prepare($sql_va);
     $stmt->bindParam(":idusuario",$usuario);
+    
     $stmt->bindParam(":idepisodio",$id_episodio);
+
+    
     
     try{
         $stmt->execute();
         $dados=$stmt->fetchAll();
-        if (count($dados) > 0) {
-            echo "<script>return confirm('voce ja avaliou essa obra,você deseja alterar a nota ');</script>";
-            echo"fogo no cu";
-        } else {
+        
+        if (!empty($dados)) {
+            
+            return TRUE;
+            
+        }else {
             
 
             $dataAtual = date('Y-m-d H:i:s');
@@ -270,6 +297,28 @@ function alterarEpisodio($id,$des,$titulo){
         echo"Erro ao cadastrar cliente3.";
     }
 }
+
+if (isset($_GET['confirmado']) && $_GET['confirmado'] == '1') {
+    $episodio = $_GET['episodio'];
+    $usuario = $_GET['usuario'];
+    $serie = $_GET['serie'];
+    echo $_SESSION['id_usuario'];
+    $sql_d_a = "DELETE FROM avaliacao WHERE idusuario = :idusuario AND idepisodio = :idepisodio";
+    $stmt = $pdo->prepare($sql_d_a);
+    $stmt->bindParam(":idusuario", $usuario);
+    $stmt->bindParam(":idepisodio", $episodio);
+
+    try{$stmt->execute();
+
+    // Redireciona de volta à página original
+    header("Location: detales_obra.php?nome=" . urlencode($serie));
+    exit();
+    }catch(PDOException $e){
+        error_log("Erro ao inserir cliente3:".$e->getMessage());
+        echo"Erro ao cadastrar cliente3.";
+    }
+}
+
 
 
 ?>

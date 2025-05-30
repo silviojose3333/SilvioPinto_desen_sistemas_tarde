@@ -97,13 +97,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit" name="nome" value="<?=htmlspecialchars($serie["id_serie"])?>" style="all: unset; cursor: pointer;">
     <div style="border: 1px solid #ccc; padding: 20px; margin: 10px; display: flex; gap: 20px; align-items: center; background-color: #f9f9f9;">
     <div>
-
+   <?php $id=$serie['id_serie'];
+    $temporadas=selecionarTemporada($id);
+    $temporada_f=selecionarTemporada1($id);
+    $episodio_f1=selecionarEpisodio1($temporada_f['id_temporada']);
+    ?>
     <img src= "<?=htmlspecialchars($serie['imagem'])?>" width='200'><br><br>
     <h1><?=htmlspecialchars($serie["nome_serie"])?></h1>
     <h2><?=htmlspecialchars($serie["tipo"])?></h2>
     <h3><?=htmlspecialchars($serie["genero"])?></h3>
     <p><?=htmlspecialchars($serie["sinopse"])?></p>
-    <?php $nota = $serie['media_nota'] !== null ? number_format($serie['media_nota'], 1) : '0.0';?>
+    <?php $nota = $episodio_f1['media_nota'] !== null ? number_format($episodio_f1['media_nota'], 1) : '0.0';?>
     <p><?=htmlspecialchars($nota)?>/10</p>
 
     <input type="hidden" name="tipo_form" value="obra">

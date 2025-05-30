@@ -26,7 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if($tipo==="avaliacao"){
     $id=$_POST['id'];
-    avaliar($_SESSION['id_usuario'],$_POST['nome'],$_POST['nota']);
+    $avaliacaoRepetida = avaliar($_SESSION['id_usuario'], $_POST['nome'], $_POST['nota']);
+
+    if ($avaliacaoRepetida == TRUE) {
+      echo "<script>
+          window.onload = function() {
+              confirmAction(" . json_encode($_SESSION['id_usuario']) . ", " . json_encode($_POST['nome']) . ", " . json_encode($id) . ");
+          };
+      </script>";
+      $avaliacaoRepetida= FALSE;
+  }
+    
     
     
 
@@ -35,9 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id=$_POST['id'];
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])){
-      alterarTemporada($id,$_POST['text']);
+      
+      alterarTemporada($_POST['nome'],$_POST['text']);
     } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao2'])){
-      alterarEpisodio($id,$_POST['text'],$_POST['titulo']);
+      alterarEpisodio($_POST['nome'],$_POST['text'],$_POST['titulo']);
     }
 
   }
@@ -57,10 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
   }
     
-    //echo "<p>Você digitou:</p>";
-    //echo "Campo 1: " . htmlspecialchars($campo1) . "<br>";
-    //echo "Campo 2: " . htmlspecialchars($campo2) . "<br>";
-    
 }elseif($_SERVER['REQUEST_METHOD'] === 'GET'){
   $id=$_GET['nome'];
     
@@ -68,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
-if($id==null){
+if(empty($id)){
   header("Location:login.php");
   exit();
 }
@@ -152,6 +159,8 @@ $opcoes_menu=$permissoes[$id_perfil];
       <p><?=htmlspecialchars($serie["sinopse"])?></p>
       <?php $nota = $episodio_f1['media_nota'] !== null ? number_format($episodio_f1['media_nota'], 1) : '0.0';?>
     <p><?=htmlspecialchars($nota)?>/10</p>
+    <?php $avaliacoesOb= selecionarTotalAvaliacoes($episodio_f1['id_episodio'])?>
+        <label><p>N.A:<?= htmlspecialchars($avaliacoesOb['quantidade'])?></p>
                         
     <?php if ($serie['ativo']): ?>
       <a class="btn" href="status.php?id=<?= $serie['id_serie'] ?>&acao=desativar&tabela=serie&serie=<?= $id ?>">Desativar</a>
@@ -169,7 +178,8 @@ $opcoes_menu=$permissoes[$id_perfil];
                 <input type="hidden" name="id" value="<?= $serie['id_serie']  ?>">
                 <input type="hidden" name="tipo_form" value="avaliacao">
                 <input type="hidden" name="nome" value="<?= htmlspecialchars($episodio_f1['id_episodio']) ?>">
-
+                <input type="range" id="nota" name="nota" min="1" max="10" value="5" oninput="outputNota.value = nota.value">
+                <output name="outputNota">5</output><br><br>
 
                 <button type="submit">Enviar</button>
                 <button type="button" onclick="fechar('modalAvaliação<?= $episodio_f1['id_episodio'] ?>')">Cancelar</button>
@@ -187,6 +197,8 @@ $opcoes_menu=$permissoes[$id_perfil];
         echo"<div class=\"submenu-wrapper\">";
         ?><button type="button" class="botao-principal" data-target="submenu-<?= $index ?>"  onclick="toggleSubmenu(<?= $index ?>)"><?=htmlspecialchars($temporada['descrisao_tem'])?></button>
         <?php $nota = $episodio_f['media_nota'] !== null ? number_format($episodio_f['media_nota'], 1) : '0.0';?>
+        <?php $avaliacoesTem=selecionarTotalAvaliacoes($episodio_f['id_episodio'])?>
+        <label><p>N.A:<?= htmlspecialchars($avaliacoesTem['quantidade'])?></p>
         
         <p><?=htmlspecialchars($nota)?>/10</p>
         <?php if ($temporada['ativo']): ?>
@@ -196,7 +208,9 @@ $opcoes_menu=$permissoes[$id_perfil];
                     <?php endif; ?>
         <?php if($id_perfil==2):?>
         <button onclick="abrir('modalAvaliação<?= $episodio_f['id_episodio']?>')">avliar</button>
-    
+        <?php if($id_perfil==1):?>
+          <button onclick="abrir('modalAlterar<?= $episodio_f['id_episodio']?>')">avliar</button>
+          <?php endif;?>
         <div id="modalAvaliação<?= $episodio_f['id_episodio'] ?>" class="overlay">
           <div class="modal">
             <form method="POST" action="detales_obra.php">
@@ -212,24 +226,24 @@ $opcoes_menu=$permissoes[$id_perfil];
           </div>
         </div>
         <?php else:?>
-                  <button onclick="pedidoLogar()">avliar</button><br><br>
-              <?php endif;?>
+            <button onclick="pedidoLogar()">avliar</button><br><br>
+          <?php endif;?>
               <?php if($id_perfil==1):?>
-                <button onclick="abrir('modalAlterar<?= $episodio_f['id_episodio']?>')">avliar</button>
-              <div id="modalAlterar<?= $episodio_f['id_episodio'] ?>" class="overlay">
-          <div class="modal">
-            <form method="POST" action="detales_obra.php">
-                <h3>Comentar sobre <?= htmlspecialchars($serie['nome_serie'] ) ?></h3>
-                <input type="hidden" name="id" value="<?= $serie['id_serie']  ?>">
-                <input type="hidden" name="tipo_form" value="alterar">
-                <input type="hidden" name="nome" value="<?= htmlspecialchars($temporada['id_temporada']) ?>">
-                <input type="text" id="text" name="text" value="<?php echo htmlspecialchars($temporada['descrisao_tem']) ?>" >
-                <br>
-                <button type="submit" name="acao" value="1">Enviar</button>
-                <button type="button" onclick="fechar('modalAlterar<?= $episodio_f['id_episodio'] ?>')">Cancelar</button>
-            </form>
-          </div>
-        </div>
+                
+                <div id="modalAlterar<?= $episodio_f['id_episodio'] ?>" class="overlay">
+                  <div class="modal">
+                    <form method="POST" action="detales_obra.php">
+                      <h3>Comentar sobre <?= htmlspecialchars($serie['nome_serie'] ) ?></h3>
+                      <input type="hidden" name="id" value="<?= $serie['id_serie']  ?>">
+                      <input type="hidden" name="tipo_form" value="alterar">
+                      <input type="hidden" name="nome" value="<?= htmlspecialchars($temporada['id_temporada']) ?>">
+                      <input type="text" id="text" name="text" value="<?php echo htmlspecialchars($temporada['descrisao_tem']) ?>" >
+                      <br>
+                      <button type="submit" name="acao" value="1">Enviar</button>
+                      <button type="button" onclick="fechar('modalAlterar<?= $episodio_f['id_episodio'] ?>')">Cancelar</button>
+                    </form>
+                  </div>
+                </div>
               <?php endif;?>
                 
         <?php
@@ -269,8 +283,9 @@ $opcoes_menu=$permissoes[$id_perfil];
                     <?php else: ?>
                         <a class="btn" href="status.php?id=<?= $episodio['id_episodio'] ?>&acao=ativar&tabela=episodio&serie=<?= $id ?>">Ativar</a>
                     <?php endif; ?>
-                <!--<?php// $avaliacoes=selecionarTotalAvaliacoes($episodio['id_episodio'])?>
-                <p>N.A:<?php//htmlspecialchars($avaliacoes['quantidade'])?></p>-->
+                
+                <?php $avaliacoesEp=selecionarTotalAvaliacoes($episodio['id_episodio'])?>
+                <label><p>N.A:<?= htmlspecialchars($avaliacoesEp['quantidade'])?></p>
               </label>
 
               <?php if($id_perfil==1):?>
@@ -313,6 +328,7 @@ $opcoes_menu=$permissoes[$id_perfil];
                 </div>
               <?php endif;
               echo "</div>";
+              
               endforeach;
               if($id_perfil==1):?>
                 <!--<button onclick="abrir('modaliserção<?= $episodio_f1['id_episodio'] ?>')">avliar</button>-->

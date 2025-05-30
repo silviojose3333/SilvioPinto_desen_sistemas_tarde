@@ -152,7 +152,7 @@
     <h2><?=htmlspecialchars($serie["tipo"])?></h2>
     <h3><?=htmlspecialchars($serie["genero"])?></h3>
     <p><?=htmlspecialchars($serie["sinopse"])?></p>
-    <?php $nota = $serie['media_nota'] !== null ? number_format($serie['media_nota'], 1) : '0.0';?>
+    <?php $nota = $episodio_f1['media_nota'] !== null ? number_format($episodio_f1['media_nota'], 1) : '0.0';?>
     <p><?=htmlspecialchars($nota)?>/10</p>
     <input type="hidden" name="tipo_form" value="obra">
 </div>

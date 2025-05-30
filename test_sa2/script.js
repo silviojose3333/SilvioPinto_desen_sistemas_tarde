@@ -66,3 +66,13 @@ function pedidoLogar() {
         window.location.href = "login.php";
     } 
 }
+function confirmAction(usuario,episodio,serie) {
+  console.log(usuario);
+  console.log(episodio);
+  console.log(serie);
+
+  if (confirm("Você já avaliaou a obra, se quizer mudar a nota por fazor aberte 'ok' e clique para avaliar novamente")) {
+      // Redireciona com os dados via GET
+      window.location.href = "funcao.php?confirmado=1&usuario=" + encodeURIComponent(usuario) + "&episodio=" + encodeURIComponent(episodio) + "&serie=" + encodeURIComponent(serie);
+  }
+}
