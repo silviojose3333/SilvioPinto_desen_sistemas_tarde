@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
 </head>
 <body>
     <h2>Cadastro de cliente</h2>
-    <form action="cadastrar.php" method="POST">
+    <form class="cadastrarUsuario" action="cadastrar.php" method="POST">
         <label for="nome_usuario">Nome:</label>
         <input type="text" id="nome_usuario" name="nome_usuario" required>
 
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
         <input type="checkbox" onclick="mostrarSenha()">Mostrar senha
         </label>
         <input type="hidden" name="idperfil" value="2">
-        <button type="submit">Salvar nova senha</button>
+        <button class="submitAddUsuario" type="submit">Salvar nova senha</button>
         
     </form>
     <script>

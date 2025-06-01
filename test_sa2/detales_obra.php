@@ -107,6 +107,24 @@ $opcoes_menu=$permissoes[$id_perfil];
     <title>Document</title>
     <link rel="stylesheet" href="style_sa.css">
     <script src="script.js"></script>
+    <style>
+    .star-rating {
+      direction: rtl;
+      unicode-bidi: bidi-override;
+      font-size: 2rem;
+      display: inline-flex;
+      cursor: pointer;
+    }
+
+    .star {
+      color: #ccc;
+      transition: color 0.2s;
+    }
+
+    .star.filled {
+      color: gold;
+    }
+  </style>
 </head>
 <body><nav>
         <ul class="menu">
@@ -150,7 +168,7 @@ $opcoes_menu=$permissoes[$id_perfil];
         </ul>
     </nav>
     
-
+    <div class="layoutSerie">
       <img src= "<?=htmlspecialchars($serie['imagem'])?>" width='200'><br><br>
       <h1><?=htmlspecialchars($serie["nome_serie"])?></h1>
       <h2><?=htmlspecialchars($serie["tipo"])?></h2>
@@ -158,20 +176,20 @@ $opcoes_menu=$permissoes[$id_perfil];
       
       <p><?=htmlspecialchars($serie["sinopse"])?></p>
       <?php $nota = $episodio_f1['media_nota'] !== null ? number_format($episodio_f1['media_nota'], 1) : '0.0';?>
-    <p><?=htmlspecialchars($nota)?>/10</p>
+    <p class="nota"><?=htmlspecialchars($nota)?>/10</p>
     <?php $avaliacoesOb= selecionarTotalAvaliacoes($episodio_f1['id_episodio'])?>
-        <label><p>N.A:<?= htmlspecialchars($avaliacoesOb['quantidade'])?></p>
+        <label for="qtdNota"><p>N.A:<?= htmlspecialchars($avaliacoesOb['quantidade'])?></p>
                         
     <?php if ($serie['ativo']): ?>
       <a class="btn" href="status.php?id=<?= $serie['id_serie'] ?>&acao=desativar&tabela=serie&serie=<?= $id ?>">Desativar</a>
     <?php else: ?>
       <a class="btn" href="status.php?id=<?= $serie['id_serie'] ?>&acao=ativar&tabela=serie&serie=<?= $id ?>">Ativar</a>
     <?php endif; ?>
-    
+    </div>
       <?php if($id_perfil==2):?>
-      <button onclick="abrir('modalAvaliação<?= $episodio_f1['id_episodio'] ?>')">avliar</button>
+      <button class="serieAvaliar" onclick="abrir('modalAvaliação<?= $episodio_f1['id_episodio'] ?>')">avliar2</button>
     
-      <div id="modalAvaliação<?= $serie['id_serie'] ?>" class="overlay">
+      <div id="modalAvaliação<?= $episodio_f1['id_episodio'] ?>" class="overlay">
           <div class="modal">
               <form method="POST" action="detales_obra.php">
                 <h3>Comentar sobre <?= htmlspecialchars($serie['nome_serie'] ) ?></h3>
@@ -180,36 +198,45 @@ $opcoes_menu=$permissoes[$id_perfil];
                 <input type="hidden" name="nome" value="<?= htmlspecialchars($episodio_f1['id_episodio']) ?>">
                 <input type="range" id="nota" name="nota" min="1" max="10" value="5" oninput="outputNota.value = nota.value">
                 <output name="outputNota">5</output><br><br>
-
+                
+                <div class="star-rating" id="rating-container">
+      <span class="star" data-value="5">&#9733;</span>
+      <span class="star" data-value="4">&#9733;</span>
+      <span class="star" data-value="3">&#9733;</span>
+      <span class="star" data-value="2">&#9733;</span>
+      <span class="star" data-value="1">&#9733;</span>
+    </div>
+    <input type="hidden" id="rating-value" name="rating" value="0">
                 <button type="submit">Enviar</button>
                 <button type="button" onclick="fechar('modalAvaliação<?= $episodio_f1['id_episodio'] ?>')">Cancelar</button>
             </form>
           </div>
       </div>
       <?php else:?>
-          <button onclick="pedidoLogar()">alvaliar2</button><br><br>
+          <button class="serieAvaliar" onclick="pedidoLogar()">alvaliar2</button><br><br>
       <?php endif;?>
       <?php
-    
-      foreach($temporadas as $index => $temporada):
+    if($serie['tipo']=="Anime" || $serie['tipo']=="Serie"):
+      foreach(array_slice($temporadas, 1) as $index => $temporada):
+        if($temporada['ativo']==1  ||  $id_perfil==1):
         $episodio_f=selecionarEpisodio1($temporada['id_temporada']);
         
         echo"<div class=\"submenu-wrapper\">";
         ?><button type="button" class="botao-principal" data-target="submenu-<?= $index ?>"  onclick="toggleSubmenu(<?= $index ?>)"><?=htmlspecialchars($temporada['descrisao_tem'])?></button>
         <?php $nota = $episodio_f['media_nota'] !== null ? number_format($episodio_f['media_nota'], 1) : '0.0';?>
         <?php $avaliacoesTem=selecionarTotalAvaliacoes($episodio_f['id_episodio'])?>
-        <label><p>N.A:<?= htmlspecialchars($avaliacoesTem['quantidade'])?></p>
+        <label for="qtdNota"><p>N.A:<?= htmlspecialchars($avaliacoesTem['quantidade'])?></p>
         
-        <p><?=htmlspecialchars($nota)?>/10</p>
+        <p class="nota"><?=htmlspecialchars($nota)?>/10</p>
         <?php if ($temporada['ativo']): ?>
                         <a class="btn" href="status.php?id=<?= $temporada['id_temporada'] ?>&acao=desativar&tabela=temporada&serie=<?= $id ?>">Desativar</a>
                     <?php else: ?>
                         <a class="btn" href="status.php?id=<?= $temporada['id_temporada'] ?>&acao=ativar&tabela=temporada&serie=<?= $id ?>">Ativar</a>
                     <?php endif; ?>
         <?php if($id_perfil==2):?>
-        <button onclick="abrir('modalAvaliação<?= $episodio_f['id_episodio']?>')">avliar</button>
+        <button class="temporadaAvaliar" onclick="abrir('modalAvaliação<?= $episodio_f['id_episodio']?>')">avliar</button>
         <?php if($id_perfil==1):?>
-          <button onclick="abrir('modalAlterar<?= $episodio_f['id_episodio']?>')">avliar</button>
+          <button class="temporadaAlterar" onclick="abrir('modalAlterar<?= $episodio_f['id_episodio']?>')">avliar</button>
           <?php endif;?>
         <div id="modalAvaliação<?= $episodio_f['id_episodio'] ?>" class="overlay">
           <div class="modal">
@@ -226,7 +253,7 @@ $opcoes_menu=$permissoes[$id_perfil];
           </div>
         </div>
         <?php else:?>
-            <button onclick="pedidoLogar()">avliar</button><br><br>
+            <button class="temporadaAvaliar" onclick="pedidoLogar()">avliar</button><br><br>
           <?php endif;?>
               <?php if($id_perfil==1):?>
                 
@@ -252,10 +279,12 @@ $opcoes_menu=$permissoes[$id_perfil];
           <div class="submenu" id="submenu-<?= $index ?>">
           <?php $episodios=selecionarEpisodio($id_temporada);
           
-            foreach ($episodios as $episodio): ?>
+            foreach (array_slice($episodios, 1) as $episodio):
+            if($episodio['ativo']==1  ||  $id_perfil==1): ?>
+
               <label>
               <?php if($id_perfil==2):?>
-                <button onclick="abrir('modalAvaliação<?= $episodio['id_episodio'] ?>')">avaliar <?= $episodio['descrisao_ep'] ?></button>
+                <button class="episodioAvaliar" onclick="abrir('modalAvaliação<?= $episodio['id_episodio'] ?>')">avaliar <?= $episodio['descrisao_ep'] ?></button>
     
                 <div id="modalAvaliação<?= $episodio['id_episodio'] ?>" class="overlay">
                   <div class="modal">
@@ -272,9 +301,9 @@ $opcoes_menu=$permissoes[$id_perfil];
                   </div>
                 </div>
                 <?php else:?>
-                  <button onclick="pedidoLogar()">avaliar <?= $episodio['descrisao_ep'] ?></button><br><br>
+                  <button class="episodioAvaliar" onclick="pedidoLogar()">avaliar <?= $episodio['descrisao_ep'] ?></button><br><br>
               <?php endif;?>
-                <?=htmlspecialchars($episodio['titulo']); ?>
+                <p><?=htmlspecialchars($episodio['titulo']); ?></p>
                 <?php $nota = $episodio['media_nota'] !== null ? number_format($episodio['media_nota'], 1) : '0.0';?>
                 
                 <p><?=htmlspecialchars($nota)?>/10</p>
@@ -289,7 +318,7 @@ $opcoes_menu=$permissoes[$id_perfil];
               </label>
 
               <?php if($id_perfil==1):?>
-                <button onclick="abrir('modalAlterar-<?= $episodio['id_episodio']?>')">avliar</button>
+                <button class="episodioAlterar" onclick="abrir('modalAlterar-<?= $episodio['id_episodio']?>')">avliar</button>
               <div id="modalAlterar-<?= $episodio['id_episodio'] ?>" class="overlay">
           <div class="modal">
             <form method="POST" action="detales_obra.php">
@@ -307,7 +336,7 @@ $opcoes_menu=$permissoes[$id_perfil];
         </div>
               <?php endif;?>
               
-                    
+              <?php endif;?>
               <?php endforeach;
                if($id_perfil==1):?>
                 <button onclick="abrir('modaliserção<?= $episodio_f['id_episodio'] ?>')">avliar</button>
@@ -328,7 +357,7 @@ $opcoes_menu=$permissoes[$id_perfil];
                 </div>
               <?php endif;
               echo "</div>";
-              
+              endif;
               endforeach;
               if($id_perfil==1):?>
                 <!--<button onclick="abrir('modaliserção<?= $episodio_f1['id_episodio'] ?>')">avliar</button>-->
@@ -350,7 +379,36 @@ $opcoes_menu=$permissoes[$id_perfil];
                   </div>
                 </div>
               <?php endif;
+              endif;
     
             ?>
+            <script>
+    function inicializarAvaliacao() {
+      const estrelas = document.querySelectorAll('.star');
+      const inputRating = document.getElementById('rating-value');
+
+      estrelas.forEach(estrela => {
+        estrela.addEventListener('click', function () {
+          const valor = this.getAttribute('data-value');
+          atualizarEstrelas(valor);
+          salvarValor(valor);
+        });
+      });
+
+      function atualizarEstrelas(valorSelecionado) {
+        estrelas.forEach(estrela => {
+          const valorEstrela = estrela.getAttribute('data-value');
+          estrela.classList.toggle('filled', valorEstrela <= valorSelecionado);
+        });
+      }
+
+      function salvarValor(valor) {
+        inputRating.value = valor;
+      }
+    }
+
+    // Inicializa ao carregar a página
+    window.addEventListener('DOMContentLoaded', inicializarAvaliacao);
+  </script>
 </body>
 </html>

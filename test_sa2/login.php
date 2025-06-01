@@ -39,14 +39,14 @@ if($_SERVER ["REQUEST_METHOD"]=="POST"){
 </head>
 <body>
     <h2>Login</h2>
-    <form action="login.php" method="POST">
+    <form class="login" action="login.php" method="POST">
         <label for="email">email</label>
         <input type="email" id="email" name="email" required>
 
         <label for="senha">Senha</label>
         <input type="password" id="senha" name="senha" required>
 
-        <button type="submit">Entrar</button>
+        <button class="submitLogin" type="submit">Entrar</button>
 
     </form>
     <p class="linkEsqueciSenha"><a href="enviar_email.php">Esqueci minha senha</a></p>

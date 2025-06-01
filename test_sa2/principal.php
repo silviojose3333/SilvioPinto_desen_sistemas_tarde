@@ -92,7 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </li>
         </ul>
     </nav>
-    <?php foreach($series as $serie): ?>
+    <?php foreach($series as $serie): 
+        if($serie['ativo']==1  ||  $id_perfil==1):?>
+
 <form action="detales_obra.php" method="POST">
     <button type="submit" name="nome" value="<?=htmlspecialchars($serie["id_serie"])?>" style="all: unset; cursor: pointer;">
     <div style="border: 1px solid #ccc; padding: 20px; margin: 10px; display: flex; gap: 20px; align-items: center; background-color: #f9f9f9;">
@@ -102,6 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $temporada_f=selecionarTemporada1($id);
     $episodio_f1=selecionarEpisodio1($temporada_f['id_temporada']);
     ?>
+    <div class="mostrarSerie">
     <img src= "<?=htmlspecialchars($serie['imagem'])?>" width='200'><br><br>
     <h1><?=htmlspecialchars($serie["nome_serie"])?></h1>
     <h2><?=htmlspecialchars($serie["tipo"])?></h2>
@@ -111,16 +114,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <p><?=htmlspecialchars($nota)?>/10</p>
 
     <input type="hidden" name="tipo_form" value="obra">
+        </div>
 </div>
 </div>
 </button>
 </form>
 <?php if($id_perfil==2):?>
-<button onclick="abrirModal('<?= htmlspecialchars($serie['nome_serie']);?>','<?= htmlspecialchars($serie['id_serie']);?>','meuModal')">Selecionar <?= htmlspecialchars($serie['nome_serie']) ?></button><br><br>
+<button class="avaliarSerie" onclick="abrirModal('<?= htmlspecialchars($serie['nome_serie']);?>','<?= htmlspecialchars($serie['id_serie']);?>','meuModal')">Selecionar <?= htmlspecialchars($serie['nome_serie']) ?></button><br><br>
 
 
 <?php else:?>
-    <button onclick="pedidoLogar()">Selecionar <?= htmlspecialchars($serie['nome_serie']) ?></button><br><br>
+    <button class="avaliarSerie" onclick="pedidoLogar()">Selecionar <?= htmlspecialchars($serie['nome_serie']) ?></button><br><br>
+<?php endif;?>
 <?php endif;?>
 <?php endforeach;?>
 

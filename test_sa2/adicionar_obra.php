@@ -88,7 +88,7 @@ if(isset($_SESSION['id_usuario'])==1){
         </ul>
     </nav>
     <h2>Adicionar Obra</h2>
-    <form enctype="multipart/form-data" action="processar_add_obra.php" method="POST">
+    <form class="adicionarObra" enctype="multipart/form-data" action="processar_add_obra.php" method="POST">
         <!-- UM CAMPO PARA COLOCAR O NOME DA OBRA-->
         <label for="nome_obra">Nome da obra:</label>
         <input type="text" id="nome_obra" name="nome_obra" required>
@@ -104,7 +104,7 @@ if(isset($_SESSION['id_usuario'])==1){
         <!--UM CAMPO PARA COLOCAR O GENERO DA OBRA-->
         <div class="submenu-wrapper">
             <!--TRAVES DA FUNCAO TOGGLESUBMENU VAZ UM SUB-MENU AO CLICAR NO BOTAO-->
-            <button type="button"  onclick="toggleSubmenu(1)">Mais opçoes</button>
+            <button class="botaoSubmenu" type="button"   onclick="toggleSubmenu(1)">Mais opçoes</button>
 
 
             <!-- Submenu com checkboxes (criado com foreach) -->
@@ -112,7 +112,7 @@ if(isset($_SESSION['id_usuario'])==1){
                 <!--USA UM FOREACH PARA ZAVER OS CAMPOS DE CHECKBOX-->
                 <?php foreach ($genero as $valor): ?>
                     <label>
-                        <input type="checkbox" name="genero[]" value="<?php echo $valor; ?>">
+                        <input class="submenuCheckbox" type="checkbox" name="genero[]" value="<?php echo $valor; ?>">
                         <?php echo $valor; ?>
                     </label>
                 <?php endforeach; ?>
@@ -131,7 +131,7 @@ if(isset($_SESSION['id_usuario'])==1){
         <input type="file" name="imagem_obra" id="imagem_obra"><br><br>
         
 
-        <button type="submit">Adicionar Obra</button>
+        <button class="submitAddObra" type="submit">Adicionar Obra</button>
 </form>
 </body>
 </html>
