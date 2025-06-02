@@ -55,6 +55,24 @@
         <title>Pesquisa</title>
         <link rel="stylesheet" href="style_sa.css">
         <script src="script.js"></script>
+        <style>
+    .star-rating {
+      direction: rtl;
+      unicode-bidi: bidi-override;
+      font-size: 2rem;
+      display: inline-flex;
+      cursor: pointer;
+    }
+
+    .star {
+      color: #ccc;
+      transition: color 0.2s;
+    }
+
+    .star.filled {
+      color: gold;
+    }
+  </style>
     </head>
     <body>
     <nav>
@@ -183,10 +201,49 @@
 
 
     <input type="hidden" name="serie" id="inputNome">
-    <input type="range" id="nota" name="nota" min="1" max="10" value="5" oninput="outputNota.value = nota.value">
-    <output name="outputNota">5</output><br><br>
+    <div class="star-rating" id="rating-container">
+                  
+                  <span class="star" data-value="9">&#9733;</span>
+                  <span class="star" data-value="8">&#9733;</span>
+                  <span class="star" data-value="7">&#9733;</span>
+                  <span class="star" data-value="6">&#9733;</span>
+                  <span class="star" data-value="5">&#9733;</span>
+                  <span class="star" data-value="4">&#9733;</span>
+                  <span class="star" data-value="3">&#9733;</span>
+                  <span class="star" data-value="2">&#9733;</span>
+                  <span class="star" data-value="1">&#9733;</span>
+                  <span class="star" data-value="0">&#9733;</span>
+                </div>
+    <input type="hidden" id="rating-value" name="rating" value="0">
     <button type="submit">Enviar</button>
   </form>
+  <script>
+    function inicializarAvaliacao() {
+  const estrelas = document.querySelectorAll('.star');
+  const inputRating = document.getElementById('rating-value');
 
+  estrelas.forEach(estrela => {
+    estrela.addEventListener('click', function () {
+      const valor = this.getAttribute('data-value');
+      atualizarEstrelas(valor);
+      salvarValor(valor);
+    });
+  });
+
+  function atualizarEstrelas(valorSelecionado) {
+    estrelas.forEach(estrela => {
+      const valorEstrela = estrela.getAttribute('data-value');
+      estrela.classList.toggle('filled', valorEstrela <= valorSelecionado);
+    });
+  }
+
+  function salvarValor(valor) {
+    inputRating.value = (valor+1);
+  }
+}
+
+    // Inicializa ao carregar a página
+    window.addEventListener('DOMContentLoaded', inicializarAvaliacao());
+  </script>
     </body>
     </html>

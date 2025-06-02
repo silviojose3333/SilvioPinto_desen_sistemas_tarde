@@ -26,7 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if($tipo==="avaliacao"){
     $id=$_POST['id'];
-    $avaliacaoRepetida = avaliar($_SESSION['id_usuario'], $_POST['nome'], $_POST['nota']);
+    $notas = $_POST['rating'] ?? 0;
+    $avaliacaoRepetida = avaliar($_SESSION['id_usuario'], $_POST['nome'], $notas);
 
     if ($avaliacaoRepetida == TRUE) {
       echo "<script>
@@ -180,9 +181,9 @@ $opcoes_menu=$permissoes[$id_perfil];
     <?php $avaliacoesOb= selecionarTotalAvaliacoes($episodio_f1['id_episodio'])?>
         <label for="qtdNota"><p>N.A:<?= htmlspecialchars($avaliacoesOb['quantidade'])?></p>
                         
-    <?php if ($serie['ativo']): ?>
+    <?php if ($serie['ativo'] && $id_perfil==1): ?>
       <a class="btn" href="status.php?id=<?= $serie['id_serie'] ?>&acao=desativar&tabela=serie&serie=<?= $id ?>">Desativar</a>
-    <?php else: ?>
+    <?php elseif($id_perfil==1): ?>
       <a class="btn" href="status.php?id=<?= $serie['id_serie'] ?>&acao=ativar&tabela=serie&serie=<?= $id ?>">Ativar</a>
     <?php endif; ?>
     </div>
@@ -196,16 +197,22 @@ $opcoes_menu=$permissoes[$id_perfil];
                 <input type="hidden" name="id" value="<?= $serie['id_serie']  ?>">
                 <input type="hidden" name="tipo_form" value="avaliacao">
                 <input type="hidden" name="nome" value="<?= htmlspecialchars($episodio_f1['id_episodio']) ?>">
-                <input type="range" id="nota" name="nota" min="1" max="10" value="5" oninput="outputNota.value = nota.value">
-                <output name="outputNota">5</output><br><br>
+                <!--<input type="range" id="nota" name="nota" min="1" max="10" value="5" oninput="outputNota.value = nota.value">
+                <output name="outputNota">5</output><br><br>-->
                 
                 <div class="star-rating" id="rating-container">
-      <span class="star" data-value="5">&#9733;</span>
-      <span class="star" data-value="4">&#9733;</span>
-      <span class="star" data-value="3">&#9733;</span>
-      <span class="star" data-value="2">&#9733;</span>
-      <span class="star" data-value="1">&#9733;</span>
-    </div>
+                  
+                  <span class="star" data-value="9">&#9733;</span>
+                  <span class="star" data-value="8">&#9733;</span>
+                  <span class="star" data-value="7">&#9733;</span>
+                  <span class="star" data-value="6">&#9733;</span>
+                  <span class="star" data-value="5">&#9733;</span>
+                  <span class="star" data-value="4">&#9733;</span>
+                  <span class="star" data-value="3">&#9733;</span>
+                  <span class="star" data-value="2">&#9733;</span>
+                  <span class="star" data-value="1">&#9733;</span>
+                  <span class="star" data-value="0">&#9733;</span>
+                </div>
     <input type="hidden" id="rating-value" name="rating" value="0">
                 <button type="submit">Enviar</button>
                 <button type="button" onclick="fechar('modalAvaliação<?= $episodio_f1['id_episodio'] ?>')">Cancelar</button>
@@ -228,9 +235,9 @@ $opcoes_menu=$permissoes[$id_perfil];
         <label for="qtdNota"><p>N.A:<?= htmlspecialchars($avaliacoesTem['quantidade'])?></p>
         
         <p class="nota"><?=htmlspecialchars($nota)?>/10</p>
-        <?php if ($temporada['ativo']): ?>
+        <?php if ($temporada['ativo']  && $id_perfil==1 ): ?>
                         <a class="btn" href="status.php?id=<?= $temporada['id_temporada'] ?>&acao=desativar&tabela=temporada&serie=<?= $id ?>">Desativar</a>
-                    <?php else: ?>
+                    <?php elseif($id_perfil==1): ?>
                         <a class="btn" href="status.php?id=<?= $temporada['id_temporada'] ?>&acao=ativar&tabela=temporada&serie=<?= $id ?>">Ativar</a>
                     <?php endif; ?>
         <?php if($id_perfil==2):?>
@@ -245,8 +252,20 @@ $opcoes_menu=$permissoes[$id_perfil];
                 <input type="hidden" name="id" value="<?= $serie['id_serie']  ?>">
                 <input type="hidden" name="tipo_form" value="avaliacao">
                 <input type="hidden" name="nome" value="<?= htmlspecialchars($episodio_f['id_episodio']) ?>">
-                <input type="range" id="nota" name="nota" min="1" max="10" value="5" oninput="outputNota.value = nota.value">
-                <output name="outputNota">5</output><br><br>
+                <div class="star-rating" id="rating-container">
+                  
+                  <span class="star" data-value="9">&#9733;</span>
+                  <span class="star" data-value="8">&#9733;</span>
+                  <span class="star" data-value="7">&#9733;</span>
+                  <span class="star" data-value="6">&#9733;</span>
+                  <span class="star" data-value="5">&#9733;</span>
+                  <span class="star" data-value="4">&#9733;</span>
+                  <span class="star" data-value="3">&#9733;</span>
+                  <span class="star" data-value="2">&#9733;</span>
+                  <span class="star" data-value="1">&#9733;</span>
+                  <span class="star" data-value="0">&#9733;</span>
+                </div>
+    <input type="hidden" id="rating-value" name="rating" value="0">
                 <button type="submit">Enviar</button>
                 <button type="button" onclick="fechar('modalAvaliação<?= $episodio_f['id_episodio'] ?>')">Cancelar</button>
             </form>
@@ -293,8 +312,20 @@ $opcoes_menu=$permissoes[$id_perfil];
                       <input type="hidden" name="id" value="<?= $serie['id_serie']  ?>">
                       <input type="hidden" name="tipo_form" value="avaliacao">
                       <input type="hidden" name="nome" value="<?= htmlspecialchars($episodio['id_episodio']) ?>">
-                      <input type="range" id="nota" name="nota" min="1" max="10" value="5" oninput="outputNota.value = nota.value">
-                      <output name="outputNota">5</output><br><br>
+                      <div class="star-rating" id="rating-container">
+                  
+                  <span class="star" data-value="9">&#9733;</span>
+                  <span class="star" data-value="8">&#9733;</span>
+                  <span class="star" data-value="7">&#9733;</span>
+                  <span class="star" data-value="6">&#9733;</span>
+                  <span class="star" data-value="5">&#9733;</span>
+                  <span class="star" data-value="4">&#9733;</span>
+                  <span class="star" data-value="3">&#9733;</span>
+                  <span class="star" data-value="2">&#9733;</span>
+                  <span class="star" data-value="1">&#9733;</span>
+                  <span class="star" data-value="0">&#9733;</span>
+                </div>
+    <input type="hidden" id="rating-value" name="rating" value="0">
                       <button type="submit">Enviar</button>
                       <button type="button" onclick="fechar('modalAvaliação<?= $episodio['id_episodio'] ?>')">Cancelar</button>
                     </form>
@@ -307,9 +338,9 @@ $opcoes_menu=$permissoes[$id_perfil];
                 <?php $nota = $episodio['media_nota'] !== null ? number_format($episodio['media_nota'], 1) : '0.0';?>
                 
                 <p><?=htmlspecialchars($nota)?>/10</p>
-                <?php if ($episodio['ativo']): ?>
+                <?php if ($episodio['ativo']  &&  $id_perfil==1 ): ?>
                         <a class="btn" href="status.php?id=<?= $episodio['id_episodio'] ?>&acao=desativar&tabela=episodio&serie=<?= $id ?>">Desativar</a>
-                    <?php else: ?>
+                    <?php elseif($id_perfil==1): ?>
                         <a class="btn" href="status.php?id=<?= $episodio['id_episodio'] ?>&acao=ativar&tabela=episodio&serie=<?= $id ?>">Ativar</a>
                     <?php endif; ?>
                 
@@ -384,31 +415,32 @@ $opcoes_menu=$permissoes[$id_perfil];
             ?>
             <script>
     function inicializarAvaliacao() {
-      const estrelas = document.querySelectorAll('.star');
-      const inputRating = document.getElementById('rating-value');
+  const estrelas = document.querySelectorAll('.star');
+  const inputRating = document.getElementById('rating-value');
 
-      estrelas.forEach(estrela => {
-        estrela.addEventListener('click', function () {
-          const valor = this.getAttribute('data-value');
-          atualizarEstrelas(valor);
-          salvarValor(valor);
-        });
-      });
+  estrelas.forEach(estrela => {
+    estrela.addEventListener('click', function () {
+      const valor = this.getAttribute('data-value');
+      atualizarEstrelas(valor);
+      salvarValor(valor);
+    });
+  });
 
-      function atualizarEstrelas(valorSelecionado) {
-        estrelas.forEach(estrela => {
-          const valorEstrela = estrela.getAttribute('data-value');
-          estrela.classList.toggle('filled', valorEstrela <= valorSelecionado);
-        });
-      }
+  function atualizarEstrelas(valorSelecionado) {
+    estrelas.forEach(estrela => {
+      const valorEstrela = estrela.getAttribute('data-value');
+      estrela.classList.toggle('filled', valorEstrela <= valorSelecionado);
+    });
+  }
 
-      function salvarValor(valor) {
-        inputRating.value = valor;
-      }
-    }
+  function salvarValor(valor) {
+    const valorIncrementado = parseInt(valor) + 1;
+  inputRating.value = valorIncrementado;
+  }
+}
 
     // Inicializa ao carregar a página
-    window.addEventListener('DOMContentLoaded', inicializarAvaliacao);
+    window.addEventListener('DOMContentLoaded', inicializarAvaliacao());
   </script>
 </body>
 </html>

@@ -1,4 +1,29 @@
 
+function inicializarAvaliacao() {
+  const estrelas = document.querySelectorAll('.star');
+  const inputRating = document.getElementById('rating-value');
+
+  estrelas.forEach(estrela => {
+    estrela.addEventListener('click', function () {
+      const valor = this.getAttribute('data-value');
+      atualizarEstrelas(valor);
+      salvarValor(valor);
+    });
+  });
+
+  function atualizarEstrelas(valorSelecionado) {
+    estrelas.forEach(estrela => {
+      const valorEstrela = estrela.getAttribute('data-value');
+      estrela.classList.toggle('filled', valorEstrela <= valorSelecionado);
+    });
+  }
+
+  function salvarValor(valor) {
+    inputRating.value = valor;
+  }
+}
+
+
 function toggleSubmenu(index) {
     const submenu = document.getElementById('submenu-' + index);
     if (submenu) {
@@ -76,3 +101,4 @@ function confirmAction(usuario,episodio,serie) {
       window.location.href = "funcao.php?confirmado=1&usuario=" + encodeURIComponent(usuario) + "&episodio=" + encodeURIComponent(episodio) + "&serie=" + encodeURIComponent(serie);
   }
 }
+
