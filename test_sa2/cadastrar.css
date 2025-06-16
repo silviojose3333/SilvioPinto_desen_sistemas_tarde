@@ -1,0 +1,101 @@
+/* style_sa.css */
+body {
+    background-color: #121212;
+    color: #FFD700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h2 {
+    color: #FFD700;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+.cadastrarUsuario {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #333;
+}
+
+.cadastrarUsuario label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+.cadastrarUsuario input[type="text"],
+.cadastrarUsuario input[type="email"],
+.cadastrarUsuario input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #222;
+    color: #FFD700;
+    box-sizing: border-box;
+}
+
+.cadastrarUsuario input[type="text"]:focus,
+.cadastrarUsuario input[type="email"]:focus,
+.cadastrarUsuario input[type="password"]:focus {
+    outline: none;
+    border-color: #FFD700;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.cadastrarUsuario input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.submitAddUsuario {
+    background-color: #333;
+    color: #FFD700;
+    border: 1px solid #FFD700;
+    padding: 12px 25px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.submitAddUsuario:hover {
+    background-color: #FFD700;
+    color: #121212;
+    transform: translateY(-2px);
+}
+
+/* Estilo para o checkbox */
+label input[type="checkbox"] + span {
+    vertical-align: middle;
+}
+
+label {
+    margin-bottom: 15px;
+    display: inline-block;
+    color: #ccc;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .cadastrarUsuario {
+        padding: 20px;
+        margin: 10px;
+    }
+}

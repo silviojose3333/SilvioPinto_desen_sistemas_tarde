@@ -60,7 +60,7 @@ foreach($obras_melhorA  as  $obra_melhorA){
 
     // Tamanho da imagem
     $imgWidth = 50;
-    $imgHeight = 40; // ajuste se necessário
+    $imgHeight = 70; // ajuste se necessário
 
     // Posição atual Y
     $y = $pdf->GetY();
@@ -78,12 +78,12 @@ foreach($obras_melhorA  as  $obra_melhorA){
         $pdf->Image($obra_melhorA['imagem'], $marginLeft, $y, $imgWidth, $imgHeight);
         $pdf->SetY($y + $imgHeight + 3);
         $pdf->SetX($marginLeft);
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_melhorA['nome_serie']),0,1,'L');
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_melhorA['tipo']),0,1,'L');
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_melhorA['genero']),0,1,'L');
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_melhorA['sinopse']),0,1,'L');
+        $pdf->Cell(0,10,'nome da obra:'.textoPDF($obra_melhorA['nome_serie']),0,1,'L');
+        $pdf->Cell(0,10,'tipo da obra:'.textoPDF($obra_melhorA['tipo']),0,1,'L');
+        $pdf->Cell(0,10,'generos da obra:'.textoPDF($obra_melhorA['genero']),0,1,'L');
+        $pdf->Cell(0,10,'sinopse da obra:'.textoPDF($obra_melhorA['sinopse']),0,1,'L');
         $nota = $episodio_f1['media_nota'] !== null ? number_format($episodio_f1['media_nota'], 1) : '0.0';
-        $pdf->Cell(0,10,'obra:'.$nota.'/10',0,1,'L');
+        $pdf->Cell(0,10,'nota da obra:'.$nota.'/10',0,1,'L');
         $i++;
     }
 }
@@ -126,7 +126,7 @@ foreach($obras_maisA  as  $obra_maisA){
 
     // Tamanho da imagem
     $imgWidth = 50;
-    $imgHeight = 40; // ajuste se necessário
+    $imgHeight = 70; // ajuste se necessário
 
     // Posição atual Y
     $y = $pdf->GetY();
@@ -144,13 +144,13 @@ foreach($obras_maisA  as  $obra_maisA){
         $pdf->Image($obra_maisA['imagem'], $marginLeft, $y, $imgWidth, $imgHeight);
         $pdf->SetY($y + $imgHeight + 3);
         $pdf->SetX($marginLeft);
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_maisA['nome_serie']),0,1,'L');
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_maisA['tipo']),0,1,'L');
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_maisA['genero']),0,1,'L');
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_maisA['sinopse']),0,1,'L');
+        $pdf->Cell(0,10,'nome da obra:'.textoPDF($obra_maisA['nome_serie']),0,1,'L');
+        $pdf->Cell(0,10,'tipo da obra:'.textoPDF($obra_maisA['tipo']),0,1,'L');
+        $pdf->Cell(0,10,'generos da obra:'.textoPDF($obra_maisA['genero']),0,1,'L');
+        $pdf->Cell(0,10,'sinopse da obra:'.textoPDF($obra_maisA['sinopse']),0,1,'L');
         $nota = $episodio_f1['media_nota'] !== null ? number_format($episodio_f1['media_nota'], 1) : '0.0';
-        $pdf->Cell(0,10,'obra:'.$nota.'/10',0,1,'L');
-        $pdf->Cell(0,10,'obra:'.$obra_maisA['total_avaliacoes'],0,1,'L');
+        $pdf->Cell(0,10,'nota da obra:'.$nota.'/10',0,1,'L');
+        $pdf->Cell(0,10,textoPDF('numero de avaliações da obra:').$obra_maisA['total_avaliacoes'],0,1,'L');
 
         $i++;
     }
@@ -187,7 +187,7 @@ foreach($obras_melhorA  as  $obra_melhorA){
 
     // Tamanho da imagem
     $imgWidth = 50;
-    $imgHeight = 40; // ajuste se necessário
+    $imgHeight = 70; // ajuste se necessário
 
     // Posição atual Y
     $y = $pdf->GetY();
@@ -204,12 +204,12 @@ foreach($obras_melhorA  as  $obra_melhorA){
         $pdf->Image($obra_melhorA['imagem'], $marginLeft, $y, $imgWidth, $imgHeight);
         $pdf->SetY($y + $imgHeight + 3);
         $pdf->SetX($marginLeft);
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_melhorA['nome_serie']),0,1,'L');
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_melhorA['tipo']),0,1,'L');
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_melhorA['genero']),0,1,'L');
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_melhorA['sinopse']),0,1,'L');
+        $pdf->Cell(0,10,'nome da obra:'.textoPDF($obra_melhorA['nome_serie']),0,1,'L');
+        $pdf->Cell(0,10,'tipo da obra:'.textoPDF($obra_melhorA['tipo']),0,1,'L');
+        $pdf->Cell(0,10,'generos da obra:'.textoPDF($obra_melhorA['genero']),0,1,'L');
+        $pdf->Cell(0,10,'sinopse da obra:'.textoPDF($obra_melhorA['sinopse']),0,1,'L');
         $nota = $episodio_f1['media_nota'] !== null ? number_format($episodio_f1['media_nota'], 1) : '0.0';
-        $pdf->Cell(0,10,'obra:'.$nota.'/10',0,1,'L');
+        $pdf->Cell(0,10,'nota da obra:'.$nota.'/10',0,1,'L');
 
         $i++;
     }
@@ -255,7 +255,7 @@ foreach($obras_maisA  as  $obra_maisA){
 
     // Tamanho da imagem
     $imgWidth = 50;
-    $imgHeight = 40; // ajuste se necessário
+    $imgHeight = 70; // ajuste se necessário
 
     // Posição atual Y
     $y = $pdf->GetY();
@@ -273,13 +273,13 @@ foreach($obras_maisA  as  $obra_maisA){
         $pdf->Image($obra_maisA['imagem'], $marginLeft, $y, $imgWidth, $imgHeight);
         $pdf->SetY($y + $imgHeight + 3);
         $pdf->SetX($marginLeft);
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_maisA['nome_serie']),0,1,'L');
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_maisA['tipo']),0,1,'L');
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_maisA['genero']),0,1,'L');
-        $pdf->Cell(0,10,'obra:'.textoPDF($obra_maisA['sinopse']),0,1,'L');
+        $pdf->Cell(0,10,'nome da obra:'.textoPDF($obra_maisA['nome_serie']),0,1,'L');
+        $pdf->Cell(0,10,'tipo da obra:'.textoPDF($obra_maisA['tipo']),0,1,'L');
+        $pdf->Cell(0,10,'generos da obra:'.textoPDF($obra_maisA['genero']),0,1,'L');
+        $pdf->Cell(0,10,'sinopse da obra:'.textoPDF($obra_maisA['sinopse']),0,1,'L');
         $nota = $episodio_f1['media_nota'] !== null ? number_format($episodio_f1['media_nota'], 1) : '0.0';
-        $pdf->Cell(0,10,'obra:'.$nota.'/10',0,1,'L');
-        $pdf->Cell(0,10,'obra:'.$obra_maisA['total_avaliacoes'],0,1,'L');
+        $pdf->Cell(0,10,'nota da obra:'.$nota.'/10',0,1,'L');
+        $pdf->Cell(0,10,textoPDF('numero de avaliações da obra:').$obra_maisA['total_avaliacoes'],0,1,'L');
 
         $i++;
     }

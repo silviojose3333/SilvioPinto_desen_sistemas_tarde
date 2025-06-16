@@ -1,0 +1,261 @@
+body {
+    background-color: #000000;
+    color: #FFD700;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+nav {
+    width: 100%;
+    background-color: #111;
+    border-bottom: 2px solid #FFD700;
+    padding: 15px 0;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown > a {
+    color: #FFD700;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    transition: all 0.3s;
+}
+
+.dropdown > a:hover {
+    background-color: #222;
+    border-radius: 5px;
+}
+
+.dropdown-menu, .dropdown-menu2 {
+    display: none;
+    position: absolute;
+    background-color: #111;
+    border: 1px solid #FFD700;
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 200px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-menu, 
+.dropdown:hover .dropdown-menu2 {
+    display: block;
+}
+
+.dropdown-menu li, .dropdown-menu2 li {
+    margin: 5px 0;
+}
+
+.dropdown-menu a, .dropdown-menu2 a {
+    color: #FFD700;
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+    transition: all 0.3s;
+}
+
+.dropdown-menu a:hover, .dropdown-menu2 a:hover {
+    background-color: #222;
+    border-radius: 3px;
+}
+
+.pesquisa {
+    padding: 8px;
+    border: 1px solid #FFD700;
+    border-radius: 5px;
+    background-color: #111;
+    color: #FFD700;
+    margin-right: 10px;
+}
+
+.pesquisa::placeholder {
+    color: #FFD70080;
+}
+
+h2 {
+    color: #FFD700;
+    text-align: center;
+    margin: 30px 0;
+    font-size: 2em;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.adicionarObra {
+    background-color: #111;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    padding: 30px;
+    width: 80%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+.adicionarObra label {
+    color: #FFD700;
+    margin: 15px 0 5px 0;
+    font-weight: bold;
+    align-self: flex-start;
+}
+
+.adicionarObra input[type="text"],
+.adicionarObra select,
+.adicionarObra textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #FFD700;
+    border-radius: 5px;
+    background-color: #222;
+    color: #FFD700;
+    margin-bottom: 15px;
+}
+
+.adicionarObra textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.submenu-wrapper {
+    position: relative;
+    margin: 20px 0;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #111;
+    border: 1px solid #FFD700;
+    border-radius: 4px;
+    padding: 15px;
+    z-index: 10;
+    max-height: 300px;
+    overflow-y: auto;
+    left: 0;
+    top: 100%;
+}
+
+
+.botaoSubmenu {
+    background-color: transparent;
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    margin: 10px 0;
+}
+
+.botaoSubmenu:hover {
+    background-color: #FFD700;
+    color: #000;
+}
+
+.submenu {
+    display: none;
+    width: 100%;
+    background-color: #111;
+    border: 1px solid #FFD700;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.submenu label {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 3px;
+}
+
+.submenu label:hover {
+    background-color: #222;
+}
+
+.submenuCheckbox {
+    margin-right: 10px;
+}
+
+button[type="submit"], 
+.submitAddObra {
+    background-color: transparent;
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    transition: all 0.3s;
+    margin-top: 20px;
+}
+
+button[type="submit"]:hover, 
+.submitAddObra:hover {
+    background-color: #FFD700;
+    color: #000;
+    transform: scale(1.05);
+}
+
+input[type="file"] {
+    color: #FFD700;
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .dropdown {
+        width: 100%;
+    }
+    
+    .dropdown-menu, .dropdown-menu2 {
+        position: static;
+        width: 100%;
+    }
+    
+    .adicionarObra {
+        width: 95%;
+        padding: 20px;
+    }
+}
+
+
+.submenu.show {
+    display: block;
+}
+
+.submenu label {
+    display: block;
+    margin: 5px 0;
+}

@@ -40,7 +40,7 @@ if(isset($_SESSION['id_usuario'])==1){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de cliente</title>
-    <link rel="stylesheet" href="style_sa.css">
+    <link rel="stylesheet" href="adicionar_obra.css">
     <script src="script.js"></script>
     
 

@@ -1,0 +1,256 @@
+/* Estilo Black & Gold - Página de Pesquisa */
+body {
+    background-color: #000000;
+    color: #FFD700;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Container principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Barra de navegação */
+nav {
+    background-color: #111;
+    padding: 15px 0;
+    border-bottom: 2px solid #FFD700;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0 20px;
+    margin: 0;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu a {
+    color: #FFD700;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    transition: all 0.3s;
+}
+
+.menu a:hover {
+    background-color: #333;
+    border-radius: 4px;
+}
+
+/* Dropdown menus */
+.dropdown-menu, .dropdown-menu2 {
+    display: none;
+    position: absolute;
+    background-color: #222;
+    border: 1px solid #FFD700;
+    border-radius: 4px;
+    min-width: 200px;
+    z-index: 1;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+}
+
+.dropdown:hover .dropdown-menu, 
+.dropdown:hover .dropdown-menu2 {
+    display: block;
+}
+
+/* Formulário de pesquisa */
+.pesquisa {
+    background-color: #111;
+    border: 1px solid #FFD700;
+    color: #FFD700;
+    padding: 8px 15px;
+    border-radius: 4px;
+    width: 200px;
+}
+
+.pesquisa::placeholder {
+    color: #FFD700;
+    opacity: 0.7;
+}
+
+/* Filtros e opções */
+label {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    margin-right: 5px;
+    accent-color: #FFD700;
+}
+
+select {
+    background-color: #111;
+    color: #FFD700;
+    border: 1px solid #FFD700;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+/* Botões */
+button, input[type="submit"] {
+    background-color: transparent;
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    margin: 5px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #FFD700;
+    color: #000;
+}
+
+/* Cards de séries */
+.mostrarSerie {
+    background-color: #111;
+    border: 1px solid #FFD700;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    transition: transform 0.3s;
+    max-width: 300px;
+}
+
+.mostrarSerie:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.mostrarSerie img {
+    border-radius: 4px;
+    border: 1px solid #FFD700;
+}
+
+/* Modal de avaliação */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    display: none;
+}
+
+.modal {
+    background-color: #111;
+    border: 2px solid #FFD700;
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+}
+
+/* Estrelas de avaliação */
+.star-rating {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+    font-size: 2rem;
+    display: inline-flex;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+.star {
+    color: #333;
+    transition: color 0.2s;
+}
+
+.star:hover, 
+.star.filled {
+    color: #FFD700;
+}
+
+/* Submenu de gêneros */
+.submenu-wrapper {
+    position: relative;
+    margin: 20px 0;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #111;
+    border: 1px solid #FFD700;
+    border-radius: 4px;
+    padding: 15px;
+    z-index: 10;
+    max-height: 300px;
+    overflow-y: auto;
+    left: 0;
+    top: 100%;
+}
+
+.submenu li {
+    margin: 8px 0;
+    white-space: nowrap;
+}
+
+/* Layout responsivo */
+@media (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .pesquisa {
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    .mostrarSerie {
+        max-width: 100%;
+    }
+}
+.submenu-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.submenu.show {
+    display: block;
+}
+
+.submenu label {
+    display: block;
+    margin: 5px 0;
+}

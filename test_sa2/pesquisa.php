@@ -53,7 +53,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Pesquisa</title>
-        <link rel="stylesheet" href="style_sa.css">
+        <link rel="stylesheet" href="pesquisa.css">
         <script src="script.js"></script>
         <style>
     .star-rating {

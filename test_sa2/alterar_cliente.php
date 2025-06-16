@@ -52,6 +52,7 @@ if (!$usuario) {
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="alterar_cliente.css">
     <title>Editar Usuário</title>
 
 </head>

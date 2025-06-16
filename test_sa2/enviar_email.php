@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar senha</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="enviar_email.css">
 </head>
 <body>
     <h2>Recuperar senha</h2>
