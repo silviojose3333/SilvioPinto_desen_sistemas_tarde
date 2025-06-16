@@ -43,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="silvio_pinto_style.css" />
 </head>
 <body>
+    <h2>Silvio José da Silva Pinto</h2>
     <h2>Alterar Produto</h2>
 
     <!-- Formulário para buscar produto -->

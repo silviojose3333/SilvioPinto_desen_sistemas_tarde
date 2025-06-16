@@ -35,6 +35,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <h2>Silvio José da Silva Pinto</h2>
     <title>Excluir Produto</title>
     <link rel="stylesheet" href="silvio_pinto_style.css">
 </head>

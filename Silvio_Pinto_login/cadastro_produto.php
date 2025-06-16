@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="silvio_pinto_style.css">
 </head>
 <body>
+    <h2>Silvio José da Silva Pinto</h2>
     <h2>Cadastrar Produto</h2>
     <form action="cadastro_produto.php" method="POST">
         <label for="nome_prod">Nome do Produto:</label>

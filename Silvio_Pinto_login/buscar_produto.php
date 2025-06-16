@@ -41,6 +41,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="silvio_pinto_style.css" />
 </head>
 <body>
+    <h2>Silvio José da Silva Pinto</h2>
     <h2>Lista de Produtos</h2>
 
     <!-- Formulário para buscar produtos -->
