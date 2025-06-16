@@ -182,7 +182,7 @@ $opcoes_menu=$permissoes[$id_perfil];
         <label for="qtdNota"><p>N.A:<?= htmlspecialchars($avaliacoesOb['quantidade'])?></p>
         <a href="editar_serie.php?id=<?= $serie['id_serie'] ?>" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
         Editar Série
-        </a>
+        </a>    
     <?php if ($serie['ativo'] && $id_perfil==1): ?>
       <a class="btn" href="status.php?id=<?= $serie['id_serie'] ?>&acao=desativar&tabela=serie&serie=<?= $id ?>">Desativar</a>
     <?php elseif($id_perfil==1): ?>
